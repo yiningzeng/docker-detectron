@@ -1,0 +1,69 @@
+#!/bin/bash
+# writen by zengwei
+
+dir=""
+type="pjson"
+# image_type=`cat /home/baymin/work/config/Detectron/detectron/datasets/data/image_type.txt`
+outfile=""
+nohup=0
+print_help() {
+cat <<EOF
+usage:	convert2coco	-d  request where <d> is the path of input files
+			-o  output filepath "/home/baymin/demo.json" default <d>/coco/annotations/instances_train2014.json
+			-t  default "pjson"
+			-n  run in background
+			-h  prints help screen
+EOF
+exit 1
+}
+
+if [ $# -lt 2 ] ; then 
+print_help 
+exit 1; 
+fi 
+
+while getopts "d:o:t:n" opt; do  
+  case $opt in  
+    d)
+      dir=$OPTARG
+      #echo "this is -c the arg is ! $cfg"   
+      ;;  
+    o)
+      outfile=$OPTARG
+      #echo "this is -d the arg is ! $dir"   
+      ;;  
+    t)
+      type=$OPTARG
+      #echo "this is -d the arg is ! $dir"   
+      ;; 
+    n)
+      nohup=1 
+      ;; 
+    \?)  
+      print_help  
+      ;;  
+  esac  
+done
+
+echo "dir=$dir"
+echo "type=$type"
+
+
+outfile="$dir/coco/annotations/instances_train2014.json"
+echo "outfile=$outfile"
+
+mkdir -p $dir/coco/annotations $dir/coco/coco_train2014 $dir/coco/coco_val2014
+cp -rf $dir/*.* $dir/coco/coco_train2014
+cp -rf $dir/coco/coco_train2014/*.* $dir/coco/coco_val2014
+cp -rf $dir/*.$type $dir/coco/coco_train2014
+
+
+if [ $nohup -eq 1 ] ; then
+	echo "run in background"
+	nohup python /Detectron/tools/PowerJson2COCO.py --dir $dir/coco/coco_train2014/ --outfile $outfile --type $type > transform.log 2>&1 &
+else
+	echo "runing"
+	python /Detectron/tools/PowerJson2COCO.py --dir $dir/coco/coco_train2014/ --outfile $outfile --type $type
+fi
+
+cp -rf $dir/coco/annotations/instances_train2014.json $dir/coco/annotations/instances_minival2014.json
