@@ -51,7 +51,19 @@ ext_modules = [
         include_dirs=[
             _NP_INCLUDE_DIRS
         ]
-    )
+    ),
+    Extension(
+        name='detectron.utils.argsort',
+        sources=[
+            'detectron/utils/argsort.pyx'
+        ],
+        extra_compile_args=[
+            '-Wno-cpp'
+        ],
+        include_dirs=[
+            _NP_INCLUDE_DIRS
+        ]
+    ),
 ]
 
 setup(
