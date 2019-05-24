@@ -1,0 +1,54 @@
+#!/bin/bash
+# writen by zengwei
+
+cfg=""
+dir="/Detectron/detectron/datasets/data/result"
+nohup=0
+
+print_help() {
+cat <<EOF
+usage:	train	-c  request where <c> is the config file of detectron
+		-d  where <d> is the result path of training. default:"/Detectron/detectron/datasets/data/result"
+		-n  run in background
+		-h  prints help screen
+EOF
+exit 1
+}
+
+if [ $# -lt 2 ] ; then 
+print_help 
+exit 1; 
+fi 
+
+while getopts "c:d:n" opt; do  
+  case $opt in  
+    c)
+      cfg=$OPTARG
+      #echo "this is -c the arg is ! $cfg"   
+      ;;  
+    d)
+      dir=$OPTARG
+      #echo "this is -d the arg is ! $dir"   
+      ;;  
+    n)
+      nohup=1 
+      ;; 
+    \?)  
+      print_help  
+      ;;  
+  esac  
+done
+
+cd /Detectron
+mkdir -p $dir
+echo "cfg=$cfg"
+echo "out_save_dir=$dir"
+
+if [ $nohup -eq 1 ] ; then
+	echo "run in background"
+	nohup python /Detectron/tools/train_net.py --cfg $cfg OUTPUT_DIR $dir > /Detectron/detectron/datasets/data/result/training.log 2>&1 &
+else
+	echo "runing"
+	python /Detectron/tools/train_net.py --cfg $cfg OUTPUT_DIR $dir
+fi
+#python /Detectron/tools/train_net.py --cfg /Detectron/configs/getting_started/tutorial_1gpu_e2e_faster_rcnn_R-50-FPN.yaml OUTPUT_DIR /Detectron/detectron/datasets/data/result

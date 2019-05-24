@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/baymin/ai-power:ai-power-v2.0
+FROM registry.cn-hangzhou.aliyuncs.com/baymin/ai-power:ai-power-test
 ADD generate_proposals.py /Detectron/detectron/ops/generate_proposals.py
 ADD argsort.pyx /Detectron/detectron/utils/argsort.pyx
 ADD cython_nms.pyx /Detectron/detectron/utils/cython_nms.pyx
