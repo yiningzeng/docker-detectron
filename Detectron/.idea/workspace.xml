@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="minibatch_ok.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="minibatch_ok.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/detectron/roi_data/minibatch_ok.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="510">
+              <caret line="97" column="27" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
               <folding>
                 <element signature="e#986#1024#0" expanded="true" />
               </folding>
@@ -38,11 +38,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loader.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="loader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/detectron/roi_data (复件)/loader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+            <state relative-caret-position="525">
+              <caret line="71" column="29" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
+              <folding>
+                <element signature="e#1691#1729#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -340,12 +343,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/detectron/roi_data/minibatch_ok.py">
+    <entry file="file://$PROJECT_DIR$/detectron/roi_data (复件)/loader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="525">
+          <caret line="71" column="29" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
           <folding>
-            <element signature="e#986#1024#0" expanded="true" />
+            <element signature="e#1691#1729#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -360,10 +363,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/detectron/roi_data (复件)/loader.py">
+    <entry file="file://$PROJECT_DIR$/detectron/roi_data/minibatch_ok.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+        <state relative-caret-position="510">
+          <caret line="97" column="27" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
+          <folding>
+            <element signature="e#986#1024#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
