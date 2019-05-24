@@ -10,6 +10,7 @@ import glob
 import PIL.Image
 import PIL.ImageDraw
 import sys
+import cv2
 
 
 def parse_args():
@@ -19,6 +20,7 @@ def parse_args():
     parser.add_argument(
         '--dir',
         dest='dir',
+        default="/home/baymin/data/coco-json-export--0522",
         help='input dir'
     )
     parser.add_argument(
@@ -32,9 +34,7 @@ def parse_args():
         dest='outfile',
         help='set outfile'
     )
-    if len(sys.argv) < 5:
-        parser.print_help()
-        sys.exit(1)
+
     print(len(sys.argv))
     return parser.parse_args()
 
@@ -51,7 +51,7 @@ class MyEncoder(json.JSONEncoder):
             return super(MyEncoder, self).default(obj)
 
 class powerAi2coco(object):
-    def __init__(self, power_json=[], save_json_path='./tran.json'):
+    def __init__(self, dir, power_json=[], save_json_path='./tran.json'):
         '''
         :param power_json: 所有labelme的json文件路径组成的列表
         :param save_json_path: json保存位置
@@ -66,6 +66,7 @@ class powerAi2coco(object):
         self.annID = 1
         self.height = 0
         self.width = 0
+        self.dir = dir
 
         self.id = 0
         self.save_json()
@@ -97,17 +98,16 @@ class powerAi2coco(object):
         image = {}
         # img = utils.img_b64_to_arr(data['imageData'])  # 解析原图片数据
         # img=io.imread(data['imagePath']) # 通过图片路径打开图片
-        # img = cv2.imread(str(data['asset']['path']).replace("file:", ""), 0)
-        # height, width = img.shape[:2]
-        img = None
-        image['height'] = data['asset']['size']['height']
-        image['width'] = data['asset']['size']['width']
+        img = cv2.imread(self.dir + '/' + data['asset']['name'], 0)
+        height, width = img.shape[:2]
+        image['height'] = height #data['asset']['size']['height']
+        image['width'] = width #data['asset']['size']['width']
         self.id = self.id + 1
         image['id'] = self.id
         image['file_name'] = data['asset']['name'] # data['imagePath'].split('/')[-1]
 
-        self.height = data['asset']['size']['height']
-        self.width = data['asset']['size']['width']
+        self.height =  height #data['asset']['size']['height']
+        self.width = width #data['asset']['size']['width']
 
         return image
 
@@ -199,7 +199,7 @@ def main():
             power_json = glob.glob(args.dir + "/*." + args.type)
         else:
             power_json = glob.glob(args.dir + "/*." + args.type)
-        powerAi2coco(power_json, args.outfile)
+        powerAi2coco(args.dir, power_json, args.outfile)
     else:
         print 'nonono'
 
